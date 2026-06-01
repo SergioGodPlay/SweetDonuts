@@ -24,6 +24,7 @@ export default function DonutShopWebsite() {
         "Una explosión intensa y cremosa de cacao que se derrite en cada mordida",
       price: "$3.000",
       image: "../images/chocolate.jpg",
+      video: "../videos/donuts_chocolate.mp4",
     },
     {
       name: "Arequipe",
@@ -31,6 +32,7 @@ export default function DonutShopWebsite() {
         "Rellenas y bañadas con el auténtico sabor del arequipe, suave y delicioso, que conquista desde el primer bocado",
       price: "$4.000",
       image: "../images/arequipe.jpg",
+      video: "../videos/donuts_arequipe.mp4",
     },
   ];
 
