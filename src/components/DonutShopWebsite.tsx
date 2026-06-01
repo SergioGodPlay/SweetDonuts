@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 type Donut = {
   name: string;
   flavor: string;
   price: string;
   image: string;
+  video?: string;
 };
 
 export default function DonutShopWebsite() {
@@ -13,6 +16,7 @@ export default function DonutShopWebsite() {
         "Delicada, dulce y perfectamente equilibrada, ideal para los amantes de los sabores clásicos",
       price: "$3.000",
       image: "../images/vainilla.jpg",
+      video: "../videos/donas_glaseadas.mp4",
     },
     {
       name: "Chocolate",
@@ -30,34 +34,50 @@ export default function DonutShopWebsite() {
     },
   ];
 
-  const donutComponents = donuts.map((donut, index) => (
-    <div
-      key={index}
-      className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition hover:-translate-y-1"
-    >
-      <img
-        src={donut.image}
-        alt={donut.name}
-        className="rounded-2xl h-60 w-full mb-5"
-      />
+  function DonutCard({ donut }: { donut: Donut }) {
+    const [hovered, setHovered] = useState(false);
 
-      <h3 className="text-2xl font-bold mb-2 transition-all duration-300 hover:text-pink-300 hover:[text-shadow:0_0_4px_rgba(255,182,193,0.5)] cursor-pointer">
-        {donut.name}
-      </h3>
+    return (
+      <div
+        className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition hover:-translate-y-1"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {hovered && donut.video ? (
+          <video
+            src={donut.video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="rounded-2xl h-60 w-full object-cover mb-5"
+          />
+        ) : (
+          <img
+            src={donut.image}
+            alt={donut.name}
+            className="rounded-2xl h-60 w-full object-cover mb-5"
+          />
+        )}
 
-      <p className="text-gray-600 mb-4">{donut.flavor}</p>
+        <h3 className="text-2xl font-bold mb-2 transition-all duration-300 hover:text-pink-300 hover:[text-shadow:0_0_4px_rgba(255,182,193,0.5)]">
+          {donut.name}
+        </h3>
 
-      <div className="flex items-center justify-between">
-        <span className="text-2xl font-extrabold text-pink-500">
-          {donut.price}
-        </span>
+        <p className="text-gray-600 mb-4">{donut.flavor}</p>
 
-        <button className="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition cursor-pointer">
-          Comprar
-        </button>
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-extrabold text-pink-500">
+            {donut.price}
+          </span>
+
+          <button className="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition">
+            Comprar
+          </button>
+        </div>
       </div>
-    </div>
-  ));
+    );
+  }
 
   return (
     <div className="min-h-screen bg-pink-50 text-gray-800">
@@ -161,7 +181,9 @@ export default function DonutShopWebsite() {
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
-            {donutComponents}
+            {donuts.map((donut, index) => (
+              <DonutCard key={index} donut={donut} />
+            ))}
           </div>
         </div>
       </section>
