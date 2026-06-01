@@ -59,17 +59,29 @@ export default function DonutShopWebsite() {
     return (
       <div
         className="
-bg-white
+bg-gray-300
+backdrop-blur-sm
+
+border
+border-pink-200
+
 dark:bg-gray-900
-dark:border
 dark:border-gray-800
+
 rounded-3xl
 p-6
-shadow-lg
-dark:shadow-black/50
-hover:shadow-2xl
+
+shadow-[0_8px_30px_rgba(236,72,153,0.15)]
+
+dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)]
+
+hover:shadow-[0_12px_40px_rgba(236,72,153,0.25)]
+
+dark:hover:shadow-[0_12px_40px_rgba(236,72,153,0.2)]
+
 transition-all
 duration-300
+
 hover:-translate-y-2
 "
         onMouseEnter={() => setHovered(true)}
@@ -116,14 +128,16 @@ hover:-translate-y-2
 
         <h3
           className="
-          text-2xl
-          font-bold
-          mb-2
-          transition-all
-          duration-300
-          hover:text-pink-300
-          hover:[text-shadow:0_0_4px_rgba(255,182,193,0.5)]
-        "
+  neon-title
+  text-2xl
+  font-bold
+  mb-2
+  text-pink-500
+  dark:text-pink-300
+  transition-all
+  duration-300
+  hover:scale-105
+"
         >
           {donut.name}
         </h3>

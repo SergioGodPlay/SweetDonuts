@@ -21,3 +21,46 @@
     transform: translateY(-10px) rotate(270deg);
   }
 }
+
+@keyframes neonPink {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #ec4899,
+      0 0 10px #ec4899,
+      0 0 20px #ec4899;
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px #ec4899,
+      0 0 20px #ec4899,
+      0 0 40px #ec4899,
+      0 0 60px #ec4899;
+  }
+}
+
+@keyframes neonPinkDark {
+  0%, 100% {
+    text-shadow:
+      0 0 10px #ec4899,
+      0 0 20px #ec4899,
+      0 0 40px #ec4899,
+      0 0 80px #ec4899;
+  }
+
+  50% {
+    text-shadow:
+      0 0 20px #ec4899,
+      0 0 40px #ec4899,
+      0 0 80px #ec4899,
+      0 0 120px #ec4899;
+  }
+}
+
+.neon-title {
+  animation: neonPink 2s ease-in-out infinite;
+}
+
+.dark .neon-title {
+  animation: neonPinkDark 2s ease-in-out infinite;
+}
