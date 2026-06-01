@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Donut = {
   name: string;
@@ -9,6 +9,23 @@ type Donut = {
 };
 
 export default function DonutShopWebsite() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+
+    document.documentElement.classList.toggle("dark", darkMode);
+  }, [darkMode]);
+
   const donuts: Donut[] = [
     {
       name: "Vainilla",
@@ -42,15 +59,19 @@ export default function DonutShopWebsite() {
     return (
       <div
         className="
-        bg-white
-        rounded-3xl
-        p-6
-        shadow-lg
-        hover:shadow-2xl
-        transition-all
-        duration-300
-        hover:-translate-y-2
-      "
+bg-white
+dark:bg-gray-900
+dark:border
+dark:border-gray-800
+rounded-3xl
+p-6
+shadow-lg
+dark:shadow-black/50
+hover:shadow-2xl
+transition-all
+duration-300
+hover:-translate-y-2
+"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -107,7 +128,7 @@ export default function DonutShopWebsite() {
           {donut.name}
         </h3>
 
-        <p className="text-gray-600 mb-4">{donut.flavor}</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-4">{donut.flavor}</p>
 
         <div className="flex items-center justify-between">
           <span className="text-2xl font-extrabold text-pink-500">
@@ -134,9 +155,36 @@ export default function DonutShopWebsite() {
   }
 
   return (
-    <div className="min-h-screen bg-pink-50 text-gray-800">
+    <div
+      className="
+    min-h-screen
+    bg-pink-50
+    dark:bg-linear-to-b
+    dark:from-gray-950
+    dark:via-gray-900
+    dark:to-black
+    text-gray-800
+    dark:text-white
+    transition-all
+    duration-500
+  "
+    >
       {/* HERO */}
-      <section className="bg-linear-to-r from-pink-400 to-orange-300 text-white px-6 py-20">
+      <section
+        className="
+    bg-linear-to-r
+    from-pink-400
+    to-orange-300
+    dark:from-gray-950
+    dark:via-purple-950
+    dark:to-pink-950
+    text-white
+    px-6
+    py-20
+    transition-all
+    duration-500
+  "
+      >
         <h1
           className="
     group
@@ -221,9 +269,9 @@ export default function DonutShopWebsite() {
       {/* SOBRE NOSOTROS */}
       <section className="px-6 py-20">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">¿Por qué elegirnos?</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed" />
 
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
             Creamos donas artesanales con ingredientes frescos y sabores únicos.
             Nuestro objetivo es ofrecer productos deliciosos a precios
             accesibles, con diseños personalizados y atención cercana.
@@ -243,11 +291,11 @@ export default function DonutShopWebsite() {
       </section>
 
       {/* PROMOCIÓN */}
-      <section className="bg-orange-100 px-6 py-20">
+      <section className="bg-orange-100 dark:bg-gray-900 px-6 py-20">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">Promoción Especial 🎉</h2>
 
-          <p className="text-xl text-gray-700 mb-8">
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
             Compra 6 donas y recibe 2 gratis.
           </p>
 
@@ -259,7 +307,19 @@ export default function DonutShopWebsite() {
 
       {/* CONTACTO */}
       <section className="px-6 py-20">
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-10">
+        <div
+          className="
+    max-w-4xl
+    mx-auto
+    bg-white
+    dark:bg-gray-900
+    dark:border
+    dark:border-gray-800
+    rounded-3xl
+    shadow-2xl
+    p-10
+  "
+        >
           <h2 className="text-4xl font-bold mb-8 text-center">Contáctanos</h2>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -275,19 +335,46 @@ export default function DonutShopWebsite() {
               <input
                 type="text"
                 placeholder="Tu nombre"
-                className="w-full px-4 py-3 rounded-2xl border"
+                className="
+w-full
+px-4
+py-3
+rounded-2xl
+border
+dark:bg-gray-800
+dark:border-gray-700
+dark:text-white
+"
               />
 
               <input
                 type="email"
                 placeholder="Tu correo"
-                className="w-full px-4 py-3 rounded-2xl border"
+                className="
+w-full
+px-4
+py-3
+rounded-2xl
+border
+dark:bg-gray-800
+dark:border-gray-700
+dark:text-white
+"
               />
 
               <textarea
                 placeholder="Escribe tu mensaje"
                 rows={4}
-                className="w-full px-4 py-3 rounded-2xl border"
+                className="
+w-full
+px-4
+py-3
+rounded-2xl
+border
+dark:bg-gray-800
+dark:border-gray-700
+dark:text-white
+"
               />
 
               <button className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold hover:bg-pink-600 transition cursor-pointer">
@@ -299,9 +386,45 @@ export default function DonutShopWebsite() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-pink-500 text-white py-6 text-center">
+      <footer
+        className="
+    bg-pink-500
+    dark:bg-black
+    border-t
+    dark:border-pink-500/20
+    text-white
+    py-6
+    text-center
+  "
+      >
         <p>© 2026 Sweet Donuts - Todos los derechos reservados.</p>
       </footer>
+
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="
+    fixed
+    top-5
+    right-5
+    z-50
+    w-14
+    h-14
+    rounded-full
+    bg-white
+    dark:bg-gray-800
+    text-2xl
+    backdrop-blur-md
+    shadow-[0_0_20px_rgba(236,72,153,0.4)]
+    hover:shadow-[0_0_30px_rgba(236,72,153,0.8)]
+    hover:scale-110
+    hover:rotate-12
+    transition-all
+    duration-300
+    cursor-pointer
+  "
+      >
+        {darkMode ? "☀️" : "🌙"}
+      </button>
     </div>
   );
 }

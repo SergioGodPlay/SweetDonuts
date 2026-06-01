@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 .animate-donut {
   display: inline-block;
   animation: donut 3s ease-in-out infinite;
