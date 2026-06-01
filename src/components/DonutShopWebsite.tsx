@@ -39,28 +39,69 @@ export default function DonutShopWebsite() {
 
     return (
       <div
-        className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition hover:-translate-y-1"
+        className="
+        bg-white
+        rounded-3xl
+        p-6
+        shadow-lg
+        hover:shadow-2xl
+        transition-all
+        duration-300
+        hover:-translate-y-2
+      "
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {hovered && donut.video ? (
-          <video
-            src={donut.video}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="rounded-2xl h-60 w-full object-cover mb-5"
-          />
-        ) : (
+        <div className="relative h-60 mb-5 overflow-hidden rounded-2xl">
+          {/* Imagen */}
           <img
             src={donut.image}
             alt={donut.name}
-            className="rounded-2xl h-60 w-full object-cover mb-5"
-          />
-        )}
+            className={`
+            absolute
+            inset-0
+            w-full
+            h-full
 
-        <h3 className="text-2xl font-bold mb-2 transition-all duration-300 hover:text-pink-300 hover:[text-shadow:0_0_4px_rgba(255,182,193,0.5)]">
+            transition-all
+            duration-700
+            ${hovered && donut.video ? "opacity-0 scale-110" : "opacity-100 scale-100"}
+          `}
+          />
+
+          {/* Video */}
+          {donut.video && (
+            <video
+              src={donut.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={`
+              absolute
+              inset-0
+              w-full
+              h-full
+              object-cover
+              transition-all
+              duration-700
+              ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-95"}
+            `}
+            />
+          )}
+        </div>
+
+        <h3
+          className="
+          text-2xl
+          font-bold
+          mb-2
+          transition-all
+          duration-300
+          hover:text-pink-300
+          hover:[text-shadow:0_0_4px_rgba(255,182,193,0.5)]
+        "
+        >
           {donut.name}
         </h3>
 
@@ -71,7 +112,18 @@ export default function DonutShopWebsite() {
             {donut.price}
           </span>
 
-          <button className="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition">
+          <button
+            className="
+            bg-pink-500
+            text-white
+            px-4
+            py-2
+            rounded-xl
+            hover:bg-pink-600
+            transition
+            cursor-pointer
+          "
+          >
             Comprar
           </button>
         </div>
