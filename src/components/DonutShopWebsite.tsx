@@ -2,26 +2,62 @@ type Donut = {
   name: string;
   flavor: string;
   price: string;
+  image: string;
 };
 
 export default function DonutShopWebsite() {
   const donuts: Donut[] = [
     {
-      name: "Choco Explosion",
-      flavor: "Chocolate y chips",
+      name: "Vainilla",
+      flavor:
+        "Delicada, dulce y perfectamente equilibrada, ideal para los amantes de los sabores clásicos",
       price: "$3.000",
+      image: "../images/vainilla.jpg",
     },
     {
-      name: "Pink Dream",
-      flavor: "Fresa y glaseado rosa",
-      price: "$3.500",
+      name: "Chocolate",
+      flavor:
+        "Una explosión intensa y cremosa de cacao que se derrite en cada mordida",
+      price: "$3.000",
+      image: "../images/chocolate.jpg",
     },
     {
-      name: "Caramel Crunch",
-      flavor: "Caramelo y galleta",
+      name: "Arequipe",
+      flavor:
+        "Rellenas y bañadas con el auténtico sabor del arequipe, suave y delicioso, que conquista desde el primer bocado",
       price: "$4.000",
+      image: "../images/arequipe.jpg",
     },
   ];
+
+  const donutComponents = donuts.map((donut, index) => (
+    <div
+      key={index}
+      className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition hover:-translate-y-1"
+    >
+      <img
+        src={donut.image}
+        alt={donut.name}
+        className="rounded-2xl h-60 w-full mb-5"
+      />
+
+      <h3 className="text-2xl font-bold mb-2 transition-all duration-300 hover:text-pink-300 hover:[text-shadow:0_0_4px_rgba(255,182,193,0.5)] cursor-pointer">
+        {donut.name}
+      </h3>
+
+      <p className="text-gray-600 mb-4">{donut.flavor}</p>
+
+      <div className="flex items-center justify-between">
+        <span className="text-2xl font-extrabold text-pink-500">
+          {donut.price}
+        </span>
+
+        <button className="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition cursor-pointer">
+          Comprar
+        </button>
+      </div>
+    </div>
+  ));
 
   return (
     <div className="min-h-screen bg-pink-50 text-gray-800">
@@ -67,7 +103,8 @@ export default function DonutShopWebsite() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-              Donas irresistibles para cualquier momento 🍩
+              Donas irresistibles para cualquier momento{" "}
+              <span className="inline-block animate-donut">🍩</span>
             </h2>
 
             <p className="text-lg mb-8 opacity-95">
@@ -86,11 +123,22 @@ export default function DonutShopWebsite() {
             </div>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center overflow-hidden rounded-3xl">
             <img
-              src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1200&auto=format&fit=crop"
+              src="../images/portada.jpg"
               alt="Donas"
-              className="rounded-3xl shadow-2xl w-full max-w-md object-cover"
+              className="
+      rounded-3xl
+      shadow-4xl
+      w-full
+      max-w-md
+      h-120
+      transition-all
+      duration-500
+      ease-in-out
+      hover:scale-105
+      hover:shadow-black cursor-pointer
+    "
             />
           </div>
         </div>
@@ -112,43 +160,8 @@ export default function DonutShopWebsite() {
       {/* PRODUCTOS */}
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
-            <h2 className="text-4xl font-bold">Nuestras Donas</h2>
-
-            <input
-              type="text"
-              placeholder="Buscar dona..."
-              className="px-4 py-3 rounded-2xl border border-pink-200 shadow-sm w-full md:w-72"
-            />
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {donuts.map((donut, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition hover:-translate-y-1"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop"
-                  alt={donut.name}
-                  className="rounded-2xl h-56 w-full object-cover mb-5"
-                />
-
-                <h3 className="text-2xl font-bold mb-2">{donut.name}</h3>
-
-                <p className="text-gray-600 mb-4">{donut.flavor}</p>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-extrabold text-pink-500">
-                    {donut.price}
-                  </span>
-
-                  <button className="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition cursor-pointer">
-                    Comprar
-                  </button>
-                </div>
-              </div>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
+            {donutComponents}
           </div>
         </div>
       </section>
