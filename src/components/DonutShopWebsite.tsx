@@ -59,7 +59,13 @@ export default function DonutShopWebsite() {
     return (
       <div
         className="
-bg-gray-300
+bg-linear-to-r
+    from-pink-400
+    to-orange-300
+    dark:from-gray-950
+    dark:via-purple-950
+    dark:to-pink-950con
+    text-white
 backdrop-blur-sm
 
 border
@@ -171,17 +177,19 @@ hover:-translate-y-2
   return (
     <div
       className="
-    min-h-screen
-    bg-pink-50
-    dark:bg-linear-to-b
-    dark:from-gray-950
-    dark:via-gray-900
-    dark:to-black
-    text-gray-800
-    dark:text-white
-    transition-all
-    duration-500
-  "
+  min-h-screen
+  bg-linear-to-b
+  from-pink-50
+  via-rose-50
+  to-orange-50
+
+  dark:from-gray-950
+  dark:via-gray-900
+  dark:to-black
+
+  text-gray-800
+  dark:text-white
+"
     >
       {/* HERO */}
       <section
