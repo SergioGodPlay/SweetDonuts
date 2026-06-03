@@ -59,37 +59,36 @@ export default function DonutShopWebsite() {
     return (
       <div
         className="
-bg-linear-to-r
-    from-pink-400
-    to-orange-300
-    dark:from-gray-950
-    dark:via-purple-950
-    dark:to-pink-950con
-    text-white
-backdrop-blur-sm
+    bg-white
 
-border
-border-pink-200
+    dark:bg-[#181028]
 
-dark:bg-gray-900
-dark:border-gray-800
+    text-gray-800
+    dark:text-white
 
-rounded-3xl
-p-6
+    backdrop-blur-sm
 
-shadow-[0_8px_30px_rgba(236,72,153,0.15)]
+    border
+    border-pink-200
 
-dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)]
+    dark:border-pink-900/40
 
-hover:shadow-[0_12px_40px_rgba(236,72,153,0.25)]
+    rounded-3xl
+    p-6
 
-dark:hover:shadow-[0_12px_40px_rgba(236,72,153,0.2)]
+    shadow-[0_8px_30px_rgba(236,72,153,0.15)]
 
-transition-all
-duration-300
+    dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)]
 
-hover:-translate-y-2
-"
+    hover:shadow-[0_12px_40px_rgba(236,72,153,0.25)]
+
+    dark:hover:shadow-[0_12px_40px_rgba(236,72,153,0.35)]
+
+    transition-all
+    duration-300
+
+    hover:-translate-y-2
+  "
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -177,19 +176,18 @@ hover:-translate-y-2
   return (
     <div
       className="
-  min-h-screen
-  bg-linear-to-b
-  from-pink-50
-  via-rose-50
-  to-orange-50
+    min-h-screen
 
-  dark:from-gray-950
-  dark:via-gray-900
-  dark:to-black
+    bg-rose-50
 
-  text-gray-800
-  dark:text-white
-"
+    dark:bg-[#0f0a14]
+
+    text-gray-800
+    dark:text-white
+
+    transition-all
+    duration-500
+  "
     >
       {/* HERO */}
       <section
@@ -209,39 +207,17 @@ hover:-translate-y-2
       >
         <h1
           className="
-    group
     text-center
     text-7xl
     font-extrabold
+    w-[40%]
+    mx-auto
     mb-12
-    cursor-pointer
-    transition-all
-    duration-500
     select-none
   "
         >
-          <span
-            className="
-      text-pink-500
-      transition-all
-      duration-500
-      group-hover:text-pink-300
-      group-hover:[text-shadow:0_0_10px_#ec4899,0_0_20px_#ec4899,0_0_40px_#ec4899]
-    "
-          >
-            Sweet
-          </span>{" "}
-          <span
-            className="
-      text-orange-400
-      transition-all
-      duration-500
-      group-hover:text-yellow-300
-      group-hover:[text-shadow:0_0_10px_#facc15,0_0_20px_#facc15,0_0_40px_#facc15]
-    "
-          >
-            Donuts
-          </span>
+          <span className="sweet-neon">Sweet</span>{" "}
+          <span className="donuts-neon">Donuts</span>
         </h1>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">

@@ -7,6 +7,46 @@
   animation: donut 3s ease-in-out infinite;
 }
 
+@keyframes sweetGlow {
+  0%, 40%, 100% {
+    color: #ec4899;
+    text-shadow: none;
+  }
+
+  10%, 30% {
+    color: #f9a8d4;
+    text-shadow:
+      0 0 10px #ec4899,
+      0 0 20px #ec4899,
+      0 0 40px #ec4899,
+      0 0 80px #ec4899;
+  }
+}
+
+@keyframes donutsGlow {
+  0%, 40%, 100% {
+    color: #fb923c;
+    text-shadow: none;
+  }
+
+  60%, 90% {
+    color: #fde047;
+    text-shadow:
+      0 0 10px #facc15,
+      0 0 20px #facc15,
+      0 0 40px #facc15,
+      0 0 80px #facc15;
+  }
+}
+
+.sweet-neon {
+  animation: sweetGlow 4s infinite ease-in-out;
+}
+
+.donuts-neon {
+  animation: donutsGlow 4s infinite ease-in-out;
+}
+
 @keyframes donut {
   0%, 100% {
     transform: translateY(0) rotate(0deg);
