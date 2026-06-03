@@ -2,6 +2,72 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+.hero-title {
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #fbcfe8,
+    #fde68a,
+    #fbcfe8,
+    #ffffff
+  );
+
+  background-size: 300% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  animation:
+    gradientMove 5s linear infinite,
+    heroGlow 3s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 300% center;
+  }
+}
+
+@keyframes heroGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
+  }
+}
+
+.donut-float {
+  animation: donutFloat 3s ease-in-out infinite;
+}
+
+@keyframes donutFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-8px) rotate(-10deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(10deg);
+  }
+
+  75% {
+    transform: translateY(-8px) rotate(-10deg);
+  }
+}
+
 .animate-donut {
   display: inline-block;
   animation: donut 3s ease-in-out infinite;

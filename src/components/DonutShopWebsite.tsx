@@ -239,7 +239,7 @@ export default function DonutShopWebsite() {
     font-extrabold
     w-[40%]
     mx-auto
-    mb-12
+    mb-18
     select-none
   "
         >
@@ -250,8 +250,10 @@ export default function DonutShopWebsite() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-              Donas irresistibles para cualquier momento{" "}
-              <span className="inline-block animate-donut">🍩</span>
+              <span className="hero-title">
+                Donas irresistibles para cualquier momento
+              </span>{" "}
+              <span className="inline-block donut-float">🍩</span>
             </h2>
 
             <p className="text-lg mb-8 opacity-95">
