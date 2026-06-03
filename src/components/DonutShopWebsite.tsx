@@ -270,21 +270,27 @@ export default function DonutShopWebsite() {
             </div>
           </div>
 
-          <div className="flex justify-center overflow-hidden rounded-3xl">
+          <div className="flex justify-center rounded-3xl">
             <img
               src="../images/portada.jpg"
               alt="Donas"
               className="
       rounded-3xl
-      shadow-4xl
       w-full
       max-w-md
       h-120
+
       transition-all
-      duration-500
+      duration-700
       ease-in-out
+
       hover:scale-105
-      hover:shadow-black cursor-pointer
+
+      hover:shadow-[0_0_20px_rgba(236,72,153,0.6),0_0_40px_rgba(236,72,153,0.5),0_0_80px_rgba(236,72,153,0.4)]
+
+      dark:hover:shadow-[0_0_30px_rgba(236,72,153,0.8),0_0_60px_rgba(236,72,153,0.6),0_0_120px_rgba(168,85,247,0.5)]
+
+      cursor-pointer
     "
             />
           </div>
