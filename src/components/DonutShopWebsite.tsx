@@ -237,8 +237,6 @@ export default function DonutShopWebsite() {
     text-center
     text-7xl
     font-extrabold
-    w-[40%]
-    mx-auto
     mb-18
     select-none
   "
