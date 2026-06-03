@@ -92,21 +92,44 @@ export default function DonutShopWebsite() {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="relative h-60 mb-5 overflow-hidden rounded-2xl">
+        <div
+          className="relative h-60 mb-5 overflow-hidden rounded-2xl group"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onTouchStart={() => setHovered(true)}
+          onTouchEnd={() => setHovered(false)}
+        >
           {/* Imagen */}
           <img
             src={donut.image}
             alt={donut.name}
             className={`
-            absolute
-            inset-0
-            w-full
-            h-full
+      absolute
+      inset-0
+      w-full
+      h-full
 
-            transition-all
-            duration-700
-            ${hovered && donut.video ? "opacity-0 scale-110" : "opacity-100 scale-100"}
-          `}
+      transition-all
+      duration-1000
+      ease-in-out
+
+      ${hovered ? "opacity-0 scale-110 blur-[2px]" : "opacity-100 scale-100"}
+    `}
+          />
+
+          {/* Overlay */}
+          <div
+            className={`
+      absolute
+      inset-0
+      bg-black/20
+
+      transition-all
+      duration-1000
+      ease-in-out
+
+      ${hovered ? "opacity-0" : "opacity-100"}
+    `}
           />
 
           {/* Video */}
@@ -117,16 +140,20 @@ export default function DonutShopWebsite() {
               muted
               loop
               playsInline
+              preload="metadata"
               className={`
-              absolute
-              inset-0
-              w-full
-              h-full
-              object-cover
-              transition-all
-              duration-700
-              ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-95"}
-            `}
+        absolute
+        inset-0
+        w-full
+        h-full
+        object-cover
+
+        transition-all
+        duration-1000
+        ease-in-out
+
+        ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-95"}
+      `}
             />
           )}
         </div>
