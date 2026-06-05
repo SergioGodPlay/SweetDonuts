@@ -359,7 +359,7 @@ export default function DonutShopWebsite() {
 
               <p className="mb-4 text-lg">📞 +57 300 000 0000</p>
 
-              <p className="mb-4 text-lg">✉️ contacto@donasfelices.com</p>
+              <p className="mb-4 text-lg">✉️ contacto@sweetdonuts.com</p>
             </div>
 
             <form className="space-y-4">
