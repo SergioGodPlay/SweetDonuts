@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Donut = {
   name: string;
@@ -8,24 +8,7 @@ type Donut = {
   video?: string;
 };
 
-export default function DonutShopWebsite() {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
-
+export const Home = () => {
   const donuts: Donut[] = [
     {
       name: "Vainilla",
@@ -201,21 +184,7 @@ export default function DonutShopWebsite() {
   }
 
   return (
-    <div
-      className="
-    min-h-screen
-
-    bg-rose-50
-
-    dark:bg-[#0f0a14]
-
-    text-gray-800
-    dark:text-white
-
-    transition-all
-    duration-500
-  "
-    >
+    <div>
       {/* HERO */}
       <section
         className="
@@ -415,47 +384,6 @@ dark:text-white
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer
-        className="
-    bg-pink-500
-    dark:bg-black
-    border-t
-    dark:border-pink-500/20
-    text-white
-    py-6
-    text-center
-  "
-      >
-        <p>© 2026 Sweet Donuts - Todos los derechos reservados.</p>
-      </footer>
-
-      <button
-        onClick={() => setDarkMode(!darkMode)}
-        className="
-    fixed
-    top-5
-    right-5
-    z-50
-    w-14
-    h-14
-    rounded-full
-    bg-white
-    dark:bg-gray-800
-    text-2xl
-    backdrop-blur-md
-    shadow-[0_0_20px_rgba(236,72,153,0.4)]
-    hover:shadow-[0_0_30px_rgba(236,72,153,0.8)]
-    hover:scale-110
-    hover:rotate-12
-    transition-all
-    duration-300
-    cursor-pointer
-  "
-      >
-        {darkMode ? "☀️" : "🌙"}
-      </button>
     </div>
   );
 }
