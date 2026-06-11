@@ -1,113 +1,323 @@
+import { useState } from "react";
+
 export const Presupuesto = () => {
-
-  const gastos = [
+  const [productos, setProductos] = useState([
     {
-      concepto: "Vainilla",
+      concepto: "Donas de Vainilla",
       cantidad: 20,
-      costo: 3000,
+      valorUnitario: 3000,
     },
     {
-      concepto: "Chocolate",
+      concepto: "Donas de Chocolate",
       cantidad: 10,
-      costo: 3000,
+      valorUnitario: 3000,
     },
     {
-      concepto: "Arequipe",
+      concepto: "Donas de Arequipe",
       cantidad: 15,
-      costo: 4000,
+      valorUnitario: 4000,
     },
-  ];
+  ]);
 
-  // Calcula el subtotal de cada producto
-  const calcularCosto = (
+  const [costosVariables, setCostosVariables] = useState([
+    {
+      concepto: "Harina, azúcar, levadura",
+      valor: 350000,
+    },
+    {
+      concepto: "Ingredientes para coberturas y rellenos",
+      valor: 280000,
+    },
+    {
+      concepto: "Empaques y bolsas",
+      valor: 120000,
+    },
+  ]);
+
+  const [costosFijos, setCostosFijos] = useState([
+    {
+      concepto: "Arriendo del local",
+      valor: 500000,
+    },
+    {
+      concepto: "Servicios públicos",
+      valor: 200000,
+    },
+    {
+      concepto: "Publicidad y Marketing",
+      valor: 150000,
+    },
+    {
+      concepto: "Otros gastos administrativos",
+      valor: 100000,
+    },
+  ]);
+
+  const [utilidadEsperada, setUtilidadEsperada] =
+    useState(550000);
+
+  const calcularSubtotal = (
     cantidad: number,
-    costoUnitario: number
-  ) => {
-    return cantidad * costoUnitario;
-  };
+    valorUnitario: number
+  ) => cantidad * valorUnitario;
 
-  // Calcula el total general
-  const total = gastos.reduce(
+  const totalVentas = productos.reduce(
     (acc, item) =>
-      acc + calcularCosto(item.cantidad, item.costo),
+      acc +
+      calcularSubtotal(
+        item.cantidad,
+        item.valorUnitario
+      ),
     0
   );
 
+  const totalVariables = costosVariables.reduce(
+    (acc, item) => acc + item.valor,
+    0
+  );
+
+  const totalFijos = costosFijos.reduce(
+    (acc, item) => acc + item.valor,
+    0
+  );
+
+  const totalGeneral =
+    totalVentas +
+    totalVariables +
+    totalFijos +
+    utilidadEsperada;
+
   return (
     <section className="px-6 py-20">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
+
         <h1 className="text-5xl font-bold text-center mb-10">
           Presupuesto Sweet Donuts
         </h1>
 
         <div className="overflow-x-auto">
           <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden">
+
             <thead>
               <tr className="bg-pink-500 text-white">
-                <th className="p-4 text-left">
-                  Concepto
-                </th>
-
-                <th className="p-4 text-center">
-                  Cantidad
-                </th>
-
-                <th className="p-4 text-center">
-                  Valor Unitario
-                </th>
-
-                <th className="p-4 text-center">
-                  Subtotal
-                </th>
+                <th className="p-4">Categoría</th>
+                <th className="p-4">Concepto</th>
+                <th className="p-4">Cantidad</th>
+                <th className="p-4">Valor Unitario</th>
+                <th className="p-4">Subtotal</th>
               </tr>
             </thead>
 
             <tbody>
-              {gastos.map((item, index) => (
+
+              {/* PRODUCTOS */}
+              {productos.map((item, index) => (
                 <tr
                   key={index}
-                  className="border-b dark:border-gray-700 hover:bg-pink-50 dark:hover:bg-gray-800 transition"
+                  className="border-b dark:border-gray-700"
                 >
+                  <td className="p-4">Ventas</td>
+
                   <td className="p-4">
-                    {item.concepto}
+                    <input
+                      type="text"
+                      value={item.concepto}
+                      onChange={(e) => {
+                        const nuevos = [...productos];
+                        nuevos[index].concepto =
+                          e.target.value;
+                        setProductos(nuevos);
+                      }}
+                      className="w-full border rounded-lg p-2 dark:bg-gray-800"
+                    />
                   </td>
 
-                  <td className="p-4 text-center">
-                    {item.cantidad}
+                  <td className="p-4">
+                    <input
+                      type="number"
+                      value={item.cantidad}
+                      onChange={(e) => {
+                        const nuevos = [...productos];
+                        nuevos[index].cantidad =
+                          Number(e.target.value);
+                        setProductos(nuevos);
+                      }}
+                      className="w-24 border rounded-lg p-2 text-center dark:bg-gray-800"
+                    />
                   </td>
 
-                  <td className="p-4 text-center">
+                  <td className="p-4">
+                    <input
+                      type="number"
+                      value={item.valorUnitario}
+                      onChange={(e) => {
+                        const nuevos = [...productos];
+                        nuevos[index].valorUnitario =
+                          Number(e.target.value);
+                        setProductos(nuevos);
+                      }}
+                      className="w-32 border rounded-lg p-2 text-center dark:bg-gray-800"
+                    />
+                  </td>
+
+                  <td className="p-4 font-semibold text-pink-500">
                     $
-                    {item.costo.toLocaleString(
-                      "es-CO"
-                    )}
-                  </td>
-
-                  <td className="p-4 text-center font-semibold text-pink-500">
-                    $
-                    {calcularCosto(
+                    {calcularSubtotal(
                       item.cantidad,
-                      item.costo
+                      item.valorUnitario
                     ).toLocaleString("es-CO")}
                   </td>
                 </tr>
               ))}
+
+              {/* COSTOS VARIABLES */}
+              {costosVariables.map((item, index) => (
+                <tr
+                  key={`variable-${index}`}
+                  className="border-b dark:border-gray-700"
+                >
+                  <td className="p-4">
+                    Costos Variables
+                  </td>
+
+                  <td className="p-4">
+                    {item.concepto}
+                  </td>
+
+                  <td>-</td>
+                  <td>-</td>
+
+                  <td className="p-4">
+                    <input
+                      type="number"
+                      value={item.valor}
+                      onChange={(e) => {
+                        const nuevos = [
+                          ...costosVariables,
+                        ];
+
+                        nuevos[index].valor =
+                          Number(e.target.value);
+
+                        setCostosVariables(
+                          nuevos
+                        );
+                      }}
+                      className="w-36 border rounded-lg p-2 text-center dark:bg-gray-800"
+                    />
+                  </td>
+                </tr>
+              ))}
+
+              {/* COSTOS FIJOS */}
+              {costosFijos.map((item, index) => (
+                <tr
+                  key={`fijo-${index}`}
+                  className="border-b dark:border-gray-700"
+                >
+                  <td className="p-4">
+                    Costos Fijos
+                  </td>
+
+                  <td className="p-4">
+                    {item.concepto}
+                  </td>
+
+                  <td>-</td>
+                  <td>-</td>
+
+                  <td className="p-4">
+                    <input
+                      type="number"
+                      value={item.valor}
+                      onChange={(e) => {
+                        const nuevos = [
+                          ...costosFijos,
+                        ];
+
+                        nuevos[index].valor =
+                          Number(e.target.value);
+
+                        setCostosFijos(nuevos);
+                      }}
+                      className="w-36 border rounded-lg p-2 text-center dark:bg-gray-800"
+                    />
+                  </td>
+                </tr>
+              ))}
+
             </tbody>
 
             <tfoot>
-              <tr className="font-bold bg-pink-100 dark:bg-gray-800">
-                <td
-                  colSpan={3}
-                  className="p-4 text-right"
-                >
-                  TOTAL GENERAL
-                </td>
 
-                <td className="p-4 text-center text-pink-600 text-xl">
-                  ${total.toLocaleString("es-CO")}
+              <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
+                <td colSpan={4} className="p-4">
+                  Total Ventas
+                </td>
+                <td className="p-4">
+                  $
+                  {totalVentas.toLocaleString(
+                    "es-CO"
+                  )}
                 </td>
               </tr>
+
+              <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
+                <td colSpan={4} className="p-4">
+                  Total Costos Variables
+                </td>
+                <td className="p-4">
+                  $
+                  {totalVariables.toLocaleString(
+                    "es-CO"
+                  )}
+                </td>
+              </tr>
+
+              <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
+                <td colSpan={4} className="p-4">
+                  Total Costos Fijos
+                </td>
+                <td className="p-4">
+                  $
+                  {totalFijos.toLocaleString(
+                    "es-CO"
+                  )}
+                </td>
+              </tr>
+
+              <tr className="bg-green-100 dark:bg-green-900 font-bold">
+                <td colSpan={4} className="p-4">
+                  Utilidad Esperada
+                </td>
+                <td className="p-4">
+                  <input
+                    type="number"
+                    value={utilidadEsperada}
+                    onChange={(e) =>
+                      setUtilidadEsperada(
+                        Number(e.target.value)
+                      )
+                    }
+                    className="w-36 border rounded-lg p-2 text-center text-black"
+                  />
+                </td>
+              </tr>
+
+              <tr className="bg-pink-500 text-white text-xl font-bold">
+                <td colSpan={4} className="p-4">
+                  TOTAL GENERAL
+                </td>
+                <td className="p-4">
+                  $
+                  {totalGeneral.toLocaleString(
+                    "es-CO"
+                  )}
+                </td>
+              </tr>
+
             </tfoot>
+
           </table>
         </div>
       </div>
