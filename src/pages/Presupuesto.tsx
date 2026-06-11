@@ -53,51 +53,41 @@ export const Presupuesto = () => {
     },
   ]);
 
-  const [utilidadEsperada, setUtilidadEsperada] =
-    useState(550000);
+  const calcularSubtotal = (cantidad: number, valorUnitario: number) =>
+    cantidad * valorUnitario;
 
-  const calcularSubtotal = (
-    cantidad: number,
-    valorUnitario: number
-  ) => cantidad * valorUnitario;
+  const formatoCOP = (valor: number) =>
+    new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      minimumFractionDigits: 0,
+    }).format(valor);
 
   const totalVentas = productos.reduce(
-    (acc, item) =>
-      acc +
-      calcularSubtotal(
-        item.cantidad,
-        item.valorUnitario
-      ),
-    0
+    (acc, item) => acc + calcularSubtotal(item.cantidad, item.valorUnitario),
+    0,
   );
 
   const totalVariables = costosVariables.reduce(
     (acc, item) => acc + item.valor,
-    0
+    0,
   );
 
-  const totalFijos = costosFijos.reduce(
-    (acc, item) => acc + item.valor,
-    0
-  );
+  const totalFijos = costosFijos.reduce((acc, item) => acc + item.valor, 0);
 
-  const totalGeneral =
-    totalVentas +
-    totalVariables +
-    totalFijos +
-    utilidadEsperada;
+  const utilidad = totalVentas - totalVariables - totalFijos;
+
+  const totalGeneral = totalVentas + totalVariables + totalFijos + utilidad;
 
   return (
     <section className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
-
         <h1 className="text-5xl font-bold text-center mb-10">
           Presupuesto Sweet Donuts
         </h1>
 
         <div className="overflow-x-auto">
           <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden">
-
             <thead>
               <tr className="bg-pink-500 text-white">
                 <th className="p-4">Categoría</th>
@@ -109,13 +99,9 @@ export const Presupuesto = () => {
             </thead>
 
             <tbody>
-
               {/* PRODUCTOS */}
               {productos.map((item, index) => (
-                <tr
-                  key={index}
-                  className="border-b dark:border-gray-700"
-                >
+                <tr key={index} className="border-b dark:border-gray-700">
                   <td className="p-4">Ventas</td>
 
                   <td className="p-4">
@@ -124,8 +110,7 @@ export const Presupuesto = () => {
                       value={item.concepto}
                       onChange={(e) => {
                         const nuevos = [...productos];
-                        nuevos[index].concepto =
-                          e.target.value;
+                        nuevos[index].concepto = e.target.value;
                         setProductos(nuevos);
                       }}
                       className="w-full border rounded-lg p-2 dark:bg-gray-800"
@@ -138,8 +123,7 @@ export const Presupuesto = () => {
                       value={item.cantidad}
                       onChange={(e) => {
                         const nuevos = [...productos];
-                        nuevos[index].cantidad =
-                          Number(e.target.value);
+                        nuevos[index].cantidad = Number(e.target.value);
                         setProductos(nuevos);
                       }}
                       className="w-24 border rounded-lg p-2 text-center dark:bg-gray-800"
@@ -152,8 +136,7 @@ export const Presupuesto = () => {
                       value={item.valorUnitario}
                       onChange={(e) => {
                         const nuevos = [...productos];
-                        nuevos[index].valorUnitario =
-                          Number(e.target.value);
+                        nuevos[index].valorUnitario = Number(e.target.value);
                         setProductos(nuevos);
                       }}
                       className="w-32 border rounded-lg p-2 text-center dark:bg-gray-800"
@@ -161,11 +144,9 @@ export const Presupuesto = () => {
                   </td>
 
                   <td className="p-4 font-semibold text-pink-500">
-                    $
-                    {calcularSubtotal(
-                      item.cantidad,
-                      item.valorUnitario
-                    ).toLocaleString("es-CO")}
+                    {formatoCOP(
+                      calcularSubtotal(item.cantidad, item.valorUnitario),
+                    )}
                   </td>
                 </tr>
               ))}
@@ -176,34 +157,35 @@ export const Presupuesto = () => {
                   key={`variable-${index}`}
                   className="border-b dark:border-gray-700"
                 >
-                  <td className="p-4">
-                    Costos Variables
-                  </td>
+                  <td className="p-4">Costos Variables</td>
 
-                  <td className="p-4">
-                    {item.concepto}
-                  </td>
+                  <td className="p-4">{item.concepto}</td>
 
                   <td>-</td>
                   <td>-</td>
 
                   <td className="p-4">
                     <input
-                      type="number"
-                      value={item.valor}
+                      type="text"
+                      value={formatoCOP(item.valor)}
                       onChange={(e) => {
-                        const nuevos = [
-                          ...costosVariables,
-                        ];
-
-                        nuevos[index].valor =
-                          Number(e.target.value);
-
-                        setCostosVariables(
-                          nuevos
+                        const numero = Number(
+                          e.target.value.replace(/\D/g, ""),
                         );
+
+                        const nuevos = [...costosVariables];
+                        nuevos[index].valor = numero;
+
+                        setCostosVariables(nuevos);
                       }}
-                      className="w-36 border rounded-lg p-2 text-center dark:bg-gray-800"
+                      className="
+      w-40
+      border
+      rounded-lg
+      p-2
+      text-center
+      dark:bg-gray-800
+    "
                     />
                   </td>
                 </tr>
@@ -215,92 +197,80 @@ export const Presupuesto = () => {
                   key={`fijo-${index}`}
                   className="border-b dark:border-gray-700"
                 >
-                  <td className="p-4">
-                    Costos Fijos
-                  </td>
+                  <td className="p-4">Costos Fijos</td>
 
-                  <td className="p-4">
-                    {item.concepto}
-                  </td>
+                  <td className="p-4">{item.concepto}</td>
 
                   <td>-</td>
                   <td>-</td>
 
                   <td className="p-4">
                     <input
-                      type="number"
-                      value={item.valor}
+                      type="text"
+                      value={formatoCOP(item.valor)}
                       onChange={(e) => {
-                        const nuevos = [
-                          ...costosFijos,
-                        ];
+                        const numero = Number(
+                          e.target.value.replace(/\D/g, ""),
+                        );
 
-                        nuevos[index].valor =
-                          Number(e.target.value);
+                        const nuevos = [...costosFijos];
+                        nuevos[index].valor = numero;
 
                         setCostosFijos(nuevos);
                       }}
-                      className="w-36 border rounded-lg p-2 text-center dark:bg-gray-800"
+                      className="
+      w-40
+      border
+      rounded-lg
+      p-2
+      text-center
+      dark:bg-gray-800
+    "
                     />
                   </td>
                 </tr>
               ))}
-
             </tbody>
 
             <tfoot>
-
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
                 <td colSpan={4} className="p-4">
                   Total Ventas
                 </td>
-                <td className="p-4">
-                  $
-                  {totalVentas.toLocaleString(
-                    "es-CO"
-                  )}
-                </td>
+                <td className="p-4">{formatoCOP(totalVentas)}</td>
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
                 <td colSpan={4} className="p-4">
                   Total Costos Variables
                 </td>
-                <td className="p-4">
-                  $
-                  {totalVariables.toLocaleString(
-                    "es-CO"
-                  )}
-                </td>
+                <td className="p-4">{formatoCOP(totalVariables)}</td>
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
                 <td colSpan={4} className="p-4">
                   Total Costos Fijos
                 </td>
-                <td className="p-4">
-                  $
-                  {totalFijos.toLocaleString(
-                    "es-CO"
-                  )}
-                </td>
+                <td className="p-4">{formatoCOP(totalFijos)}</td>
               </tr>
 
-              <tr className="bg-green-100 dark:bg-green-900 font-bold">
+              <tr
+                className={`font-bold ${
+                  utilidad >= 0
+                    ? "bg-green-100 dark:bg-green-900"
+                    : "bg-red-100 dark:bg-red-900"
+                }`}
+              >
                 <td colSpan={4} className="p-4">
-                  Utilidad Esperada
+                  {utilidad >= 0 ? "Utilidad Esperada" : "Pérdida Esperada"}
                 </td>
-                <td className="p-4">
-                  <input
-                    type="number"
-                    value={utilidadEsperada}
-                    onChange={(e) =>
-                      setUtilidadEsperada(
-                        Number(e.target.value)
-                      )
-                    }
-                    className="w-36 border rounded-lg p-2 text-center text-black"
-                  />
+
+                <td
+                  className={`p-4 text-center ${
+                    utilidad >= 0 ? "text-green-600" : "text-red-600"
+                  }`}
+                >
+                  {formatoCOP(utilidad)}
                 </td>
               </tr>
 
@@ -308,16 +278,9 @@ export const Presupuesto = () => {
                 <td colSpan={4} className="p-4">
                   TOTAL GENERAL
                 </td>
-                <td className="p-4">
-                  $
-                  {totalGeneral.toLocaleString(
-                    "es-CO"
-                  )}
-                </td>
+                <td className="p-4">{formatoCOP(totalGeneral)}</td>
               </tr>
-
             </tfoot>
-
           </table>
         </div>
       </div>
