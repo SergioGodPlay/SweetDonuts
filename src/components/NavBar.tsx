@@ -1,9 +1,8 @@
-import type { Dispatch, SetStateAction } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 type NavbarProps = {
   darkMode: boolean;
-  setDarkMode: Dispatch<SetStateAction<boolean>>;
+  setDarkMode: (value: boolean) => void;
 };
 
 export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
@@ -21,28 +20,60 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
         dark:border-gray-800
       "
     >
-      <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+      <div
+        className="
+          max-w-7xl
+          mx-auto
+          px-4
+          h-18
+          flex
+          items-center
+          justify-between
+          gap-2
+        "
+      >
         {/* Logo */}
         <Link
           to="/"
           className="
-    text-xl
-    md:text-3xl
-    font-extrabold
+    flex
+    items-center
+    gap-2
+    min-w-0
     text-pink-500
     hover:scale-105
     transition
   "
         >
-          🍩 <span className="hidden sm:inline">Sweet Donuts</span>
+          <span className="text-xl sm:text-2xl md:text-3xl">🍩</span>
+
+          <span
+            className="
+      text-base
+      sm:text-xl
+      md:text-3xl
+      font-extrabold
+      truncate
+    "
+          >
+            Sweet Donuts
+          </span>
         </Link>
 
         {/* Menú */}
-        <div className="flex items-center gap-6">
+        <div
+          className="
+            flex
+            items-center
+            gap-2
+            sm:gap-4
+            md:gap-6
+          "
+        >
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `font-semibold transition hover:text-pink-500 ${
+              `text-sm md:text-base font-semibold transition hover:text-pink-500 ${
                 isActive ? "text-pink-500" : "text-gray-700 dark:text-gray-300"
               }`
             }
@@ -53,7 +84,7 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
           <NavLink
             to="/presupuesto"
             className={({ isActive }) =>
-              `font-semibold transition hover:text-pink-500 ${
+              `text-sm md:text-base font-semibold transition hover:text-pink-500 ${
                 isActive ? "text-pink-500" : "text-gray-700 dark:text-gray-300"
               }`
             }
@@ -61,19 +92,25 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
             Presupuesto
           </NavLink>
 
-          {/* Botón tema */}
+          {/* Tema */}
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="
-              w-12
-              h-12
+              w-10
+              h-10
+              md:w-12
+              md:h-12
               rounded-full
               bg-pink-100
               dark:bg-gray-800
               hover:scale-110
               transition
               cursor-pointer
-              text-xl
+              text-lg
+              md:text-xl
+              flex
+              items-center
+              justify-center
             "
           >
             {darkMode ? "☀️" : "🌙"}
