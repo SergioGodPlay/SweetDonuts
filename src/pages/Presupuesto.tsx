@@ -143,7 +143,7 @@ export const Presupuesto = () => {
                     />
                   </td>
 
-                  <td className="p-4 font-semibold text-pink-500">
+                  <td className="p-4 font-semibold text-center text-pink-500">
                     {formatoCOP(
                       calcularSubtotal(item.cantidad, item.valorUnitario),
                     )}
@@ -237,21 +237,21 @@ export const Presupuesto = () => {
                 <td colSpan={4} className="p-4">
                   Total Ventas
                 </td>
-                <td className="p-4">{formatoCOP(totalVentas)}</td>
+                <td className="p-4 text-center">{formatoCOP(totalVentas)}</td>
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
                 <td colSpan={4} className="p-4">
                   Total Costos Variables
                 </td>
-                <td className="p-4">{formatoCOP(totalVariables)}</td>
+                <td className="p-4 text-center">{formatoCOP(totalVariables)}</td>
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
                 <td colSpan={4} className="p-4">
                   Total Costos Fijos
                 </td>
-                <td className="p-4">{formatoCOP(totalFijos)}</td>
+                <td className="p-4 text-center">{formatoCOP(totalFijos)}</td>
               </tr>
 
               <tr
