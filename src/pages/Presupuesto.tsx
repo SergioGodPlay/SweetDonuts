@@ -2,24 +2,34 @@ export const Presupuesto = () => {
 
   const gastos = [
     {
-      concepto: "Harina",
+      concepto: "Vainilla",
       cantidad: 20,
-      costo: 80000,
+      costo: 3000,
     },
     {
       concepto: "Chocolate",
       cantidad: 10,
-      costo: 120000,
+      costo: 3000,
     },
     {
       concepto: "Arequipe",
       cantidad: 15,
-      costo: 90000,
+      costo: 4000,
     },
   ];
 
+  // Calcula el subtotal de cada producto
+  const calcularCosto = (
+    cantidad: number,
+    costoUnitario: number
+  ) => {
+    return cantidad * costoUnitario;
+  };
+
+  // Calcula el total general
   const total = gastos.reduce(
-    (acc, item) => acc + item.costo,
+    (acc, item) =>
+      acc + calcularCosto(item.cantidad, item.costo),
     0
   );
 
@@ -31,12 +41,24 @@ export const Presupuesto = () => {
         </h1>
 
         <div className="overflow-x-auto">
-          <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl">
+          <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden">
             <thead>
               <tr className="bg-pink-500 text-white">
-                <th className="p-4">Concepto</th>
-                <th className="p-4">Cantidad</th>
-                <th className="p-4">Costo</th>
+                <th className="p-4 text-left">
+                  Concepto
+                </th>
+
+                <th className="p-4 text-center">
+                  Cantidad
+                </th>
+
+                <th className="p-4 text-center">
+                  Valor Unitario
+                </th>
+
+                <th className="p-4 text-center">
+                  Subtotal
+                </th>
               </tr>
             </thead>
 
@@ -44,12 +66,29 @@ export const Presupuesto = () => {
               {gastos.map((item, index) => (
                 <tr
                   key={index}
-                  className="border-b dark:border-gray-700"
+                  className="border-b dark:border-gray-700 hover:bg-pink-50 dark:hover:bg-gray-800 transition"
                 >
-                  <td className="p-4">{item.concepto}</td>
-                  <td className="p-4">{item.cantidad}</td>
                   <td className="p-4">
-                    ${item.costo.toLocaleString()}
+                    {item.concepto}
+                  </td>
+
+                  <td className="p-4 text-center">
+                    {item.cantidad}
+                  </td>
+
+                  <td className="p-4 text-center">
+                    $
+                    {item.costo.toLocaleString(
+                      "es-CO"
+                    )}
+                  </td>
+
+                  <td className="p-4 text-center font-semibold text-pink-500">
+                    $
+                    {calcularCosto(
+                      item.cantidad,
+                      item.costo
+                    ).toLocaleString("es-CO")}
                   </td>
                 </tr>
               ))}
@@ -57,11 +96,15 @@ export const Presupuesto = () => {
 
             <tfoot>
               <tr className="font-bold bg-pink-100 dark:bg-gray-800">
-                <td colSpan={2} className="p-4">
-                  Total
+                <td
+                  colSpan={3}
+                  className="p-4 text-right"
+                >
+                  TOTAL GENERAL
                 </td>
-                <td className="p-4">
-                  ${total.toLocaleString()}
+
+                <td className="p-4 text-center text-pink-600 text-xl">
+                  ${total.toLocaleString("es-CO")}
                 </td>
               </tr>
             </tfoot>
@@ -69,5 +112,5 @@ export const Presupuesto = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
