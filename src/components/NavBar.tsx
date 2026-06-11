@@ -26,14 +26,15 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
         <Link
           to="/"
           className="
-            text-3xl
-            font-extrabold
-            text-pink-500
-            hover:scale-105
-            transition
-          "
+    text-xl
+    md:text-3xl
+    font-extrabold
+    text-pink-500
+    hover:scale-105
+    transition
+  "
         >
-          🍩 Sweet Donuts
+          🍩 <span className="hidden sm:inline">Sweet Donuts</span>
         </Link>
 
         {/* Menú */}
@@ -42,9 +43,7 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
             to="/"
             className={({ isActive }) =>
               `font-semibold transition hover:text-pink-500 ${
-                isActive
-                  ? "text-pink-500"
-                  : "text-gray-700 dark:text-gray-300"
+                isActive ? "text-pink-500" : "text-gray-700 dark:text-gray-300"
               }`
             }
           >
@@ -55,9 +54,7 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
             to="/presupuesto"
             className={({ isActive }) =>
               `font-semibold transition hover:text-pink-500 ${
-                isActive
-                  ? "text-pink-500"
-                  : "text-gray-700 dark:text-gray-300"
+                isActive ? "text-pink-500" : "text-gray-700 dark:text-gray-300"
               }`
             }
           >
@@ -85,4 +82,4 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
       </div>
     </nav>
   );
-}
+};
