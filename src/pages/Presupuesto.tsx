@@ -77,12 +77,19 @@ export const Presupuesto = () => {
 
   const utilidad = totalVentas - totalVariables - totalFijos;
 
-  const totalGeneral = totalVentas + totalVariables + totalFijos + utilidad;
-
   return (
     <section className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-bold text-center mb-10">
+        <h1
+          className="
+    presupuesto-neon
+    text-4xl
+    md:text-5xl
+    font-bold
+    text-center
+    mb-10
+  "
+        >
           Presupuesto Sweet Donuts
         </h1>
 
@@ -244,7 +251,9 @@ export const Presupuesto = () => {
                 <td colSpan={4} className="p-4">
                   Total Costos Variables
                 </td>
-                <td className="p-4 text-center">{formatoCOP(totalVariables)}</td>
+                <td className="p-4 text-center">
+                  {formatoCOP(totalVariables)}
+                </td>
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
@@ -274,12 +283,6 @@ export const Presupuesto = () => {
                 </td>
               </tr>
 
-              <tr className="bg-pink-500 text-white text-xl font-bold">
-                <td colSpan={4} className="p-4">
-                  TOTAL GENERAL
-                </td>
-                <td className="p-4">{formatoCOP(totalGeneral)}</td>
-              </tr>
             </tfoot>
           </table>
         </div>

@@ -80,6 +80,10 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
               Presupuesto
             </NavLink>
 
+            <NavLink to="/canvas" className={navLinkClass}>
+              Canvas
+            </NavLink>
+
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="
@@ -208,7 +212,13 @@ export const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
             Presupuesto
           </NavLink>
 
-          {/* Agrega aquí futuros enlaces */}
+          <NavLink
+            to="/canvas"
+            onClick={() => setMenuOpen(false)}
+            className={navLinkClass}
+          >
+            Canvas
+          </NavLink>
 
           {/*
           <NavLink

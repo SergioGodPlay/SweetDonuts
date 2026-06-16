@@ -89,6 +89,22 @@
   }
 }
 
+@keyframes deGlow {
+  0%,
+  100% {
+    color: #d4d4d8;
+    text-shadow: none;
+  }
+
+  50% {
+    color: #f8fafc;
+    text-shadow:
+      0 0 5px #ffffff,
+      0 0 10px #ffffff,
+      0 0 20px #e5e7eb;
+  }
+}
+
 @keyframes donutsGlow {
   0%, 40%, 100% {
     color: #fb923c;
@@ -107,6 +123,10 @@
 
 .sweet-neon {
   animation: sweetGlow 4s infinite ease-in-out;
+}
+
+.de-neon {
+  animation: deGlow 4s infinite ease-in-out;
 }
 
 .donuts-neon {
@@ -163,10 +183,89 @@
   }
 }
 
+:root {
+  --perfil-color: #facc15;
+  --perfil-glow-1: #fde047;
+  --perfil-glow-2: #facc15;
+}
+
+.dark {
+  --perfil-color: #f472b6;
+  --perfil-glow-1: #f9a8d4;
+  --perfil-glow-2: #f472b6;
+}
+
+.perfil-neon-letter {
+  display: inline-block;
+  animation: perfilGlow 4s infinite ease-in-out;
+}
+
+@keyframes perfilGlow {
+  0% {
+    opacity: 0.25;
+    color: var(--perfil-color);
+    text-shadow: none;
+  }
+
+  20%,
+  80% {
+    opacity: 1;
+    color: var(--perfil-color);
+    text-shadow:
+      0 0 5px var(--perfil-glow-1),
+      0 0 10px var(--perfil-glow-1),
+      0 0 20px var(--perfil-glow-2),
+      0 0 40px var(--perfil-glow-2);
+  }
+
+  100% {
+    opacity: 0.25;
+    text-shadow: none;
+  }
+}
+
 .neon-title {
   animation: neonPink 2s ease-in-out infinite;
 }
 
 .dark .neon-title {
   animation: neonPinkDark 2s ease-in-out infinite;
+}
+
+:root {
+  --presupuesto-color: #facc15;
+  --presupuesto-glow1: #fde047;
+  --presupuesto-glow2: #eab308;
+}
+
+.dark {
+  --presupuesto-color: #f472b6;
+  --presupuesto-glow1: #f9a8d4;
+  --presupuesto-glow2: #ec4899;
+}
+
+.presupuesto-neon {
+  color: var(--presupuesto-color);
+  animation: presupuestoGlow 2s infinite ease-in-out;
+}
+
+@keyframes presupuestoGlow {
+  0%,
+  20% {
+    text-shadow: none;
+  }
+
+  30%,
+  80% {
+    text-shadow:
+      0 0 5px var(--presupuesto-glow1),
+      0 0 10px var(--presupuesto-glow1),
+      0 0 20px var(--presupuesto-glow2),
+      0 0 40px var(--presupuesto-glow2),
+      0 0 80px var(--presupuesto-glow2);
+  }
+
+  100% {
+    text-shadow: none;
+  }
 }
