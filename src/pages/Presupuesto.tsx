@@ -4,17 +4,17 @@ export const Presupuesto = () => {
   const [productos, setProductos] = useState([
     {
       concepto: "Donas de Vainilla",
-      cantidad: 20,
+      cantidad: 200,
       valorUnitario: 3000,
     },
     {
       concepto: "Donas de Chocolate",
-      cantidad: 10,
+      cantidad: 200,
       valorUnitario: 3000,
     },
     {
       concepto: "Donas de Arequipe",
-      cantidad: 15,
+      cantidad: 300,
       valorUnitario: 4000,
     },
   ]);
