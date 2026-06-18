@@ -246,7 +246,7 @@
 
 .presupuesto-neon {
   color: var(--presupuesto-color);
-  animation: presupuestoGlow 2s infinite ease-in-out;
+  animation: presupuestoGlow 5s infinite ease-in-out;
 }
 
 @keyframes presupuestoGlow {
