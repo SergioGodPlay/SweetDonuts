@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 type Donut = {
   name: string;
@@ -201,7 +202,19 @@ export const Home = () => {
     duration-500
   "
       >
-        <h1
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: -30,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeOut",
+          }}
           className="
     text-center
     text-7xl
@@ -212,7 +225,7 @@ export const Home = () => {
         >
           <span className="sweet-neon">Sweet</span>{" "}
           <span className="donuts-neon">Donuts</span>
-        </h1>
+        </motion.h1>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div>
@@ -280,11 +293,35 @@ export const Home = () => {
       </section>
 
       {/* PRODUCTOS */}
+      {/* PRODUCTOS */}
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
             {donuts.map((donut, index) => (
-              <DonutCard key={index} donut={donut} />
+              <motion.div
+                key={index}
+                initial={{
+                  opacity: 0,
+                  y: 50,
+                  scale: 0.9,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                }}
+                viewport={{
+                  once: false,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                  ease: "easeOut",
+                }}
+              >
+                <DonutCard donut={donut} />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -386,4 +423,4 @@ dark:text-white
       </section>
     </div>
   );
-}
+};

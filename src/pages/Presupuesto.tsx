@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export const Presupuesto = () => {
   const [productos, setProductos] = useState([
@@ -80,7 +81,19 @@ export const Presupuesto = () => {
   return (
     <section className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
-        <h1
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: -30,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeOut",
+          }}
           className="
     presupuesto-neon
     text-4xl
@@ -91,7 +104,7 @@ export const Presupuesto = () => {
   "
         >
           Presupuesto Sweet Donuts
-        </h1>
+        </motion.h1>
 
         <div className="overflow-x-auto">
           <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden">
@@ -282,7 +295,6 @@ export const Presupuesto = () => {
                   {formatoCOP(utilidad)}
                 </td>
               </tr>
-
             </tfoot>
           </table>
         </div>
