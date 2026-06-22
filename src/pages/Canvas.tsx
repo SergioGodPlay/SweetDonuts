@@ -24,15 +24,15 @@ export const Canvas = () => {
             ease: "easeOut",
           }}
           className="
-        text-center
-        text-5xl
-        md:text-7xl
-        font-extrabold
-        mb-16
-      "
+  text-center
+  text-5xl
+  md:text-7xl
+  font-extrabold
+  mb-18
+"
         >
           <span className="sweet-neon">Canvas</span>{" "}
-          <span className="text-gray-500 dark:text-gray-300">de</span>{" "}
+          <span className="text-gray-500 dark:text-gray-300 de-neon">de</span>{" "}
           <span className="donuts-neon">Negocio</span>
         </motion.h1>
 
@@ -74,30 +74,26 @@ export const Canvas = () => {
                   perfil del cliente es:
                 </b>
 
-                <p className="mt-4">
-                  <ul className="mt-4 space-y-3">
-                    <li>
-                      🍩 Prefiere donas con precios entre $3.000 y $7.000.
-                    </li>
-                    <li>
-                      🍫 Le gustan principalmente los sabores Arequipe-Caramelo
-                      y Chocolate-Vainilla.
-                    </li>
-                    <li>
-                      ⏱️ Está dispuesto a esperar entre 5 y 15 minutos por su
-                      pedido.
-                    </li>
-                    <li>⭐ Valora la calidad del producto.</li>
-                    <li>💡 Tiene interés por sabores innovadores.</li>
-                    <li>
-                      ☕ Prefiere acompañar las donas con café o chocolate
-                      caliente.
-                    </li>
-                    <li>🧪 Estaría dispuesto a probar nuevos sabores.</li>
-                    <li>🌇 Consume donas principalmente en la tarde.</li>
-                    <li>🏪 Suele comprarlas en panaderías y cafeterías.</li>
-                  </ul>
-                </p>
+                <ul className="mt-4 space-y-3">
+                  <li>🍩 Prefiere donas con precios entre $3.000 y $7.000.</li>
+                  <li>
+                    🍫 Le gustan principalmente los sabores Arequipe-Caramelo y
+                    Chocolate-Vainilla.
+                  </li>
+                  <li>
+                    ⏱️ Está dispuesto a esperar entre 5 y 15 minutos por su
+                    pedido.
+                  </li>
+                  <li>⭐ Valora la calidad del producto.</li>
+                  <li>💡 Tiene interés por sabores innovadores.</li>
+                  <li>
+                    ☕ Prefiere acompañar las donas con café o chocolate
+                    caliente.
+                  </li>
+                  <li>🧪 Estaría dispuesto a probar nuevos sabores.</li>
+                  <li>🌇 Consume donas principalmente en la tarde.</li>
+                  <li>🏪 Suele comprarlas en panaderías y cafeterías.</li>
+                </ul>
               </div>
             </div>
 
@@ -555,23 +551,25 @@ export const Canvas = () => {
                   src="/images/donas_para_negocio.jfif"
                   alt="Donas para negocio"
                   className="
-        absolute
-        bottom-0
-        right-0
-        w-1/2
-        h-1/2
-        object-cover
-        rounded-3xl
-        shadow-2xl
-        border-4
-        border-white
-        dark:border-gray-900
-        translate-x-6
-        translate-y-6
-        hover:scale-105
-        transition-all
-        duration-300
-      "
+  absolute
+  bottom-0
+  right-0
+  w-1/2
+  h-1/2
+  object-cover
+  rounded-3xl
+  shadow-2xl
+  border-4
+  border-white
+  dark:border-gray-900
+  translate-x-0
+translate-y-0
+md:translate-x-6
+md:translate-y-6
+  hover:scale-105
+  transition-all
+  duration-300
+"
                 />
               </div>
             </div>

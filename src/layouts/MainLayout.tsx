@@ -29,6 +29,7 @@ export default function MainLayout() {
         dark:text-white
         transition-all
         duration-500
+        overflow-x-hidden
       "
     >
 

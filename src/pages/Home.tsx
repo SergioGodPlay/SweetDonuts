@@ -298,30 +298,9 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
             {donuts.map((donut, index) => (
-              <motion.div
-                key={index}
-                initial={{
-                  opacity: 0,
-                  y: 50,
-                  scale: 0.9,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                }}
-                viewport={{
-                  once: false,
-                  amount: 0.2,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.15,
-                  ease: "easeOut",
-                }}
-              >
+              <div key={index}>
                 <DonutCard donut={donut} />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

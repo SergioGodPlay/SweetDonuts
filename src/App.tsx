@@ -7,7 +7,6 @@ import { Canvas } from "./pages/Canvas";
 
 function App() {
   
-
   return (
     <BrowserRouter>
       <Routes>
