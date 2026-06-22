@@ -1,7 +1,7 @@
 {
   "name": "sweet-donuts",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "react-dom": "^19.2.6",
     "react-icons": "^5.6.0",
     "react-router-dom": "^7.17.0",
+    "swiper": "^12.2.0",
     "theme-change": "^3.0.4"
   },
   "devDependencies": {

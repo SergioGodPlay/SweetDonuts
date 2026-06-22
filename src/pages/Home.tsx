@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Star } from "lucide-react";
 
-type Donut = {
+export interface Donut {
   name: string;
   flavor: string;
   price: string;
   image: string;
-  video?: string;
-};
+  video: string;
+  rating: number;
+  reviews: number;
+  featured: boolean;
+  bestseller: boolean;
+  new: boolean;
+}
 
 export const Home = () => {
   const donuts: Donut[] = [
@@ -18,6 +24,11 @@ export const Home = () => {
       price: "$3.000",
       image: "../images/vainilla.jpg",
       video: "../videos/donas_glaseadas.mp4",
+      rating: 3,
+      reviews: 96,
+      featured: true,
+      bestseller: false,
+      new: false,
     },
     {
       name: "Chocolate",
@@ -26,6 +37,11 @@ export const Home = () => {
       price: "$3.000",
       image: "../images/chocolate.jpg",
       video: "../videos/donuts_chocolate.mp4",
+      rating: 5.0,
+      reviews: 153,
+      featured: true,
+      bestseller: true,
+      new: false,
     },
     {
       name: "Arequipe",
@@ -34,6 +50,11 @@ export const Home = () => {
       price: "$4.000",
       image: "../images/arequipe.jpg",
       video: "../videos/donuts_arequipe.mp4",
+      rating: 4.9,
+      reviews: 127,
+      featured: true,
+      bestseller: false,
+      new: true,
     },
   ];
 
@@ -43,36 +64,36 @@ export const Home = () => {
     return (
       <div
         className="
-    bg-white
+        bg-white
 
-    dark:bg-[#181028]
+        dark:bg-[#181028]
 
-    text-gray-800
-    dark:text-white
+        text-gray-800
+        dark:text-white
 
-    backdrop-blur-sm
+        backdrop-blur-sm
 
-    border
-    border-pink-200
+        border
+        border-pink-200
 
-    dark:border-pink-900/40
+        dark:border-pink-900/40
 
-    rounded-3xl
-    p-6
+        rounded-3xl
+        p-6
 
-    shadow-[0_8px_30px_rgba(236,72,153,0.15)]
+        shadow-[0_8px_30px_rgba(236,72,153,0.15)]
 
-    dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)]
+        dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)]
 
-    hover:shadow-[0_12px_40px_rgba(236,72,153,0.25)]
+        hover:shadow-[0_12px_40px_rgba(236,72,153,0.25)]
 
-    dark:hover:shadow-[0_12px_40px_rgba(236,72,153,0.35)]
+        dark:hover:shadow-[0_12px_40px_rgba(236,72,153,0.35)]
 
-    transition-all
-    duration-300
+        transition-all
+        duration-300
 
-    hover:-translate-y-2
-  "
+        hover:-translate-y-2
+      "
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -88,14 +109,14 @@ export const Home = () => {
             src={donut.image}
             alt={donut.name}
             className={`
-      absolute
-      inset-0
-      w-full
-      h-full
+            absolute
+            inset-0
+            w-full      
+            h-full
 
-      transition-all
-      duration-1000
-      ease-in-out
+            transition-all
+            duration-1000
+            ease-in-out
 
       ${hovered ? "opacity-0 scale-110 blur-[2px]" : "opacity-100 scale-100"}
     `}
@@ -104,13 +125,13 @@ export const Home = () => {
           {/* Overlay */}
           <div
             className={`
-      absolute
-      inset-0
-      bg-black/20
+            absolute
+            inset-0
+            bg-black/20
 
-      transition-all
-      duration-1000
-      ease-in-out
+            transition-all
+            duration-1000
+            ease-in-out
 
       ${hovered ? "opacity-0" : "opacity-100"}
     `}
@@ -126,15 +147,15 @@ export const Home = () => {
               playsInline
               preload="metadata"
               className={`
-        absolute
-        inset-0
-        w-full
-        h-full
-        object-cover
+              absolute
+              inset-0
+              w-full
+              h-full
+              object-cover
 
-        transition-all
-        duration-1000
-        ease-in-out
+              transition-all
+              duration-1000
+              ease-in-out
 
         ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-95"}
       `}
@@ -144,21 +165,37 @@ export const Home = () => {
 
         <h3
           className="
-  neon-title
-  text-2xl
-  font-bold
-  mb-2
-  text-pink-500
-  dark:text-pink-300
-  transition-all
-  duration-300
-  hover:scale-105
-"
+          neon-title
+          text-2xl
+          font-bold
+          mb-2
+          text-pink-500
+          dark:text-pink-300
+          transition-all
+          duration-300
+          hover:scale-105
+        "
         >
           {donut.name}
         </h3>
 
         <p className="text-gray-600 dark:text-gray-300 mb-4">{donut.flavor}</p>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1 mt-4 mb-6">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <Star
+              key={star}
+              size={18}
+              fill={star <= Math.round(donut.rating) ? "#facc15" : "none"}
+              className="text-yellow-400"
+            />
+          ))}
+
+          <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
+            {donut.rating} ({donut.reviews})
+          </span>
+        </div>
 
         <div className="flex items-center justify-between">
           <span className="text-2xl font-extrabold text-pink-500">
@@ -189,18 +226,18 @@ export const Home = () => {
       {/* HERO */}
       <section
         className="
-    bg-linear-to-r
-    from-pink-400
-    to-orange-300
-    dark:from-gray-950
-    dark:via-purple-950
-    dark:to-pink-950
-    text-white
-    px-6
-    py-20
-    transition-all
-    duration-500
-  "
+        bg-linear-to-r
+        from-pink-400
+        to-orange-300
+        dark:from-gray-950
+        dark:via-purple-950
+        dark:to-pink-950
+        text-white
+        px-6
+        py-20
+        transition-all
+        duration-500
+      "
       >
         <motion.h1
           initial={{
@@ -216,12 +253,12 @@ export const Home = () => {
             ease: "easeOut",
           }}
           className="
-    text-center
-    text-7xl
-    font-extrabold
-    mb-18
-    select-none
-  "
+          text-center
+          text-7xl
+          font-extrabold
+          mb-18
+          select-none
+        "
         >
           <span className="sweet-neon">Sweet</span>{" "}
           <span className="donuts-neon">Donuts</span>
@@ -257,23 +294,23 @@ export const Home = () => {
               src="../images/portada.jpg"
               alt="Donas"
               className="
-      rounded-3xl
-      w-full
-      max-w-md
-      h-120
+              rounded-3xl
+              w-full
+              max-w-md
+              h-120
 
-      transition-all
-      duration-700
-      ease-in-out
+              transition-all
+              duration-700
+              ease-in-out
 
-      hover:scale-105
+              hover:scale-105
 
-      hover:shadow-[0_0_20px_rgba(236,72,153,0.6),0_0_40px_rgba(236,72,153,0.5),0_0_80px_rgba(236,72,153,0.4)]
+              hover:shadow-[0_0_20px_rgba(236,72,153,0.6),0_0_40px_rgba(236,72,153,0.5),0_0_80px_rgba(236,72,153,0.4)]
 
-      dark:hover:shadow-[0_0_30px_rgba(236,72,153,0.8),0_0_60px_rgba(236,72,153,0.6),0_0_120px_rgba(168,85,247,0.5)]
+              dark:hover:shadow-[0_0_30px_rgba(236,72,153,0.8),0_0_60px_rgba(236,72,153,0.6),0_0_120px_rgba(168,85,247,0.5)]
 
-      cursor-pointer
-    "
+              cursor-pointer
+            "
             />
           </div>
         </div>
@@ -325,16 +362,16 @@ export const Home = () => {
       <section className="px-6 py-20">
         <div
           className="
-    max-w-4xl
-    mx-auto
-    bg-white
-    dark:bg-gray-900
-    dark:border
-    dark:border-gray-800
-    rounded-3xl
-    shadow-2xl
-    p-10
-  "
+          max-w-4xl
+          mx-auto
+          bg-white
+          dark:bg-gray-900
+          dark:border
+          dark:border-gray-800
+          rounded-3xl
+          shadow-2xl
+          p-10
+        "
         >
           <h2 className="text-4xl font-bold mb-8 text-center">Contáctanos</h2>
 
@@ -352,45 +389,45 @@ export const Home = () => {
                 type="text"
                 placeholder="Tu nombre"
                 className="
-w-full
-px-4
-py-3
-rounded-2xl
-border
-dark:bg-gray-800
-dark:border-gray-700
-dark:text-white
-"
+                w-full
+                px-4
+                py-3
+                rounded-2xl
+                border
+                dark:bg-gray-800
+                dark:border-gray-700
+                dark:text-white
+                "
               />
 
               <input
                 type="email"
                 placeholder="Tu correo"
                 className="
-w-full
-px-4
-py-3
-rounded-2xl
-border
-dark:bg-gray-800
-dark:border-gray-700
-dark:text-white
-"
+                w-full
+                px-4
+                py-3
+                rounded-2xl
+                border
+                dark:bg-gray-800
+                dark:border-gray-700
+                dark:text-white
+                "
               />
 
               <textarea
                 placeholder="Escribe tu mensaje"
                 rows={4}
                 className="
-w-full
-px-4
-py-3
-rounded-2xl
-border
-dark:bg-gray-800
-dark:border-gray-700
-dark:text-white
-"
+                w-full
+                px-4
+                py-3
+                rounded-2xl
+                border
+              dark:bg-gray-800
+              dark:border-gray-700
+              dark:text-white
+                "
               />
 
               <button className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold hover:bg-pink-600 transition cursor-pointer">
