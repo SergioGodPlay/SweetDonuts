@@ -5,18 +5,21 @@ export const Presupuesto = () => {
   const [productos, setProductos] = useState([
     {
       concepto: "Donas de Vainilla",
-      cantidad: 200,
+      cantidad: 250,
       valorUnitario: 3000,
+      costoProduccion: 1800,
     },
     {
       concepto: "Donas de Chocolate",
       cantidad: 250,
       valorUnitario: 3000,
+      costoProduccion: 1900,
     },
     {
       concepto: "Donas de Arequipe",
       cantidad: 300,
       valorUnitario: 4000,
+      costoProduccion: 2500,
     },
   ]);
 
@@ -56,6 +59,17 @@ export const Presupuesto = () => {
 
   const calcularSubtotal = (cantidad: number, valorUnitario: number) =>
     cantidad * valorUnitario;
+
+  const calcularGananciaUnidad = (
+    valorUnitario: number,
+    costoProduccion: number,
+  ) => valorUnitario - costoProduccion;
+
+  const calcularGananciaTotal = (
+    cantidad: number,
+    valorUnitario: number,
+    costoProduccion: number,
+  ) => cantidad * calcularGananciaUnidad(valorUnitario, costoProduccion);
 
   const formatoCOP = (valor: number) =>
     new Intl.NumberFormat("es-CO", {
@@ -106,15 +120,17 @@ export const Presupuesto = () => {
           Presupuesto Sweet Donuts
         </motion.h1>
 
-        <div className="overflow-x-auto">
-          <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl overflow-hidden">
+        <div className="">
+          <table className="w-full bg-white dark:bg-gray-900 rounded-3xl shadow-xl">
             <thead>
               <tr className="bg-pink-500 text-white">
                 <th className="p-4">Categoría</th>
                 <th className="p-4">Concepto</th>
                 <th className="p-4">Cantidad</th>
                 <th className="p-4">Valor Unitario</th>
+                <th className="p-4">Costo Producción</th>
                 <th className="p-4">Subtotal</th>
+                <th className="p-4">Ganancia</th>
               </tr>
             </thead>
 
@@ -163,10 +179,115 @@ export const Presupuesto = () => {
                     />
                   </td>
 
+                  <td className="p-4">
+                    <input
+                      type="number"
+                      value={item.costoProduccion}
+                      onChange={(e) => {
+                        const nuevos = [...productos];
+
+                        nuevos[index].costoProduccion = Number(e.target.value);
+
+                        setProductos(nuevos);
+                      }}
+                      className="
+      w-32
+      border
+      rounded-lg
+      p-2
+      text-center
+      dark:bg-gray-800
+    "
+                    />
+                  </td>
+
                   <td className="p-4 font-semibold text-center text-pink-500">
                     {formatoCOP(
                       calcularSubtotal(item.cantidad, item.valorUnitario),
                     )}
+                  </td>
+
+                  <td className="p-4 text-center">
+                    <div className="relative inline-block group">
+                      <span
+                        className="
+        px-3
+        py-1
+        rounded-full
+        bg-green-100
+        text-green-600
+        font-semibold
+        cursor-help
+      "
+                      >
+                        {formatoCOP(
+                          calcularGananciaUnidad(
+                            item.valorUnitario,
+                            item.costoProduccion,
+                          ),
+                        )}
+                      </span>
+
+                      {/* Tooltip */}
+                      <div
+                        className="
+        absolute
+        left-1/2
+        -translate-x-1/2
+        bottom-full
+        mb-3
+        w-72
+        rounded-xl
+        bg-gray-900
+        text-white
+        p-4
+        shadow-xl
+        opacity-0
+        invisible
+        group-hover:opacity-100
+        group-hover:visible
+        transition-all
+        duration-300
+        z-50
+      "
+                      >
+                        <p className="font-bold mb-2">{item.concepto}</p>
+
+                        <p>Precio venta: {formatoCOP(item.valorUnitario)}</p>
+
+                        <p>
+                          Costo producción: {formatoCOP(item.costoProduccion)}
+                        </p>
+
+                        <hr className="my-2 border-gray-700" />
+
+                        <p>Ganancia por unidad:</p>
+
+                        <p className="font-bold text-green-400">
+                          {formatoCOP(
+                            calcularGananciaUnidad(
+                              item.valorUnitario,
+                              item.costoProduccion,
+                            ),
+                          )}
+                        </p>
+
+                        <hr className="my-2 border-gray-700" />
+
+                        <p>Cantidad vendida: {item.cantidad}</p>
+
+                        <p className="font-bold text-yellow-400">
+                          Ganancia total:{" "}
+                          {formatoCOP(
+                            calcularGananciaTotal(
+                              item.cantidad,
+                              item.valorUnitario,
+                              item.costoProduccion,
+                            ),
+                          )}
+                        </p>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -254,14 +375,14 @@ export const Presupuesto = () => {
 
             <tfoot>
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
-                <td colSpan={4} className="p-4">
+                <td colSpan={6} className="p-4">
                   Total Ventas
                 </td>
                 <td className="p-4 text-center">{formatoCOP(totalVentas)}</td>
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
-                <td colSpan={4} className="p-4">
+                <td colSpan={6} className="p-4">
                   Total Costos Variables
                 </td>
                 <td className="p-4 text-center">
@@ -270,7 +391,7 @@ export const Presupuesto = () => {
               </tr>
 
               <tr className="bg-pink-100 dark:bg-gray-800 font-bold">
-                <td colSpan={4} className="p-4">
+                <td colSpan={6} className="p-4">
                   Total Costos Fijos
                 </td>
                 <td className="p-4 text-center">{formatoCOP(totalFijos)}</td>
@@ -283,7 +404,7 @@ export const Presupuesto = () => {
                     : "bg-red-100 dark:bg-red-900"
                 }`}
               >
-                <td colSpan={4} className="p-4">
+                <td colSpan={6} className="p-4">
                   {utilidad >= 0 ? "Utilidad Esperada" : "Pérdida Esperada"}
                 </td>
 
