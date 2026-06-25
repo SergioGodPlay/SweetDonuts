@@ -261,7 +261,7 @@ export const Canvas = () => {
                 Ofrecemos donas frescas, deliciosas y con diferentes sabores y
                 decoraciones, elaboradas con ingredientes de calidad. Brindamos
                 una experiencia dulce y agradable para compartir en cualquier
-                ocasión, con precios accesibles y atención amable.
+                ocasión, con <b>precios accesibles y atención amable.</b>
               </p>
             </div>
           </div>

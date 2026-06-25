@@ -10,7 +10,7 @@ export const Presupuesto = () => {
     },
     {
       concepto: "Donas de Chocolate",
-      cantidad: 200,
+      cantidad: 250,
       valorUnitario: 3000,
     },
     {
@@ -46,7 +46,7 @@ export const Presupuesto = () => {
     },
     {
       concepto: "Publicidad y Marketing",
-      valor: 150000,
+      valor: 0,
     },
     {
       concepto: "Otros gastos administrativos",
